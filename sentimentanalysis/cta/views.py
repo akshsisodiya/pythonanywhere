@@ -19,10 +19,10 @@ def index(request):
 
 def major_cities(request):
 
-    Mumbai=dest.Cities('Mumbai','assets/assets/img/Mumbai.webp',graph_data.Data('Mumbai').overall_data)
-    Delhi = dest.Cities('Delhi', 'assets/assets/img/Delhi.jpg',graph_data.Data('Delhi').overall_data)
-    Kolkata = dest.Cities('Kolkata', 'assets/assets/img/Kolkata.jpg', graph_data.Data('Kolkata').overall_data)
-    Chennai = dest.Cities('Chennai', 'assets/assets/img/Chennai.jpg', graph_data.Data('Chennai').overall_data)
+    Mumbai=dest.Cities('Mumbai','https://res.cloudinary.com/dseemci6h/image/upload/v1594205707/Mumbai_nmtl78.webp',graph_data.Data('Mumbai').overall_data)
+    Delhi = dest.Cities('Delhi', 'https://res.cloudinary.com/dseemci6h/image/upload/v1594205702/Delhi_hihvem.jpg',graph_data.Data('Delhi').overall_data)
+    Kolkata = dest.Cities('Kolkata', 'https://res.cloudinary.com/dseemci6h/image/upload/v1594205703/Kolkata_cxzrkl.jpg', graph_data.Data('Kolkata').overall_data)
+    Chennai = dest.Cities('Chennai', 'https://res.cloudinary.com/dseemci6h/image/upload/v1594205702/Chennai_elym5i.jpg', graph_data.Data('Chennai').overall_data)
     cities=[Mumbai, Delhi, Kolkata, Chennai]
     return render(request, 'major_cities.html', {'cities':cities})
 
