@@ -23,6 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('major_cities',views.major_cities, name='major_cities'),
     path('about-us/',views.about_us, name='about-us'),
+    path('live-analysis/',views.live_analysis, name='live-analysis'),
+    path('covid-cases/',views.covid_cases, name='covid-cases'),
     path('city/<str:city_name>/',views.city)
 
 ]

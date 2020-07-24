@@ -1,7 +1,6 @@
-import mysql.connector
-
 class Data:
     def __init__(self,loc):
+        import mysql.connector
         self.loc = loc.lower()
 
         date_data_query={
@@ -91,5 +90,63 @@ class Data:
         #     return total_data
 
 
+class TryData:
+    def __init__(self,loc):
+        self.loc = loc.lower()
 
-oc=Data('overall')
+        self.all_data = [('22-7-2020','100','50','100','100','50','100'),('23-7-2020','200','100','200','200','70','150')]
+
+        self.temp_overall_data = [('100','50','100','100','50','100')]
+        self.overall_data=[]
+        self.overall_data.append(int(self.temp_overall_data[0][0]))
+        self.overall_data.append(int(self.temp_overall_data[0][1]))
+        self.overall_data.append(int(self.temp_overall_data[0][2]))
+        self.overall_data.append(int(self.temp_overall_data[0][3]))
+        self.overall_data.append(int(self.temp_overall_data[0][4]))
+        self.overall_data.append(int(self.temp_overall_data[0][5]))
+        print(self.overall_data)
+        #print(sum(self.temp_overall_data))
+        # j=0
+        # while(j<6):
+        #   sum=0
+        #   i=0
+        #   while(i<len(self.temp_overall_data)):
+        #       sum+=self.temp_overall_data[i][j]
+        #   self.overall_data.append(sum)
+        # to convert row into convert
+
+    def getdata(self):
+        if len(self.all_data)>7:
+            x=len(self.all_data)-7
+            self.all_data = self.all_data[x:]
+        dates=[]
+        pos=[]
+        neg=[]
+        nut=[]
+        sad=[]
+        ang=[]
+        joy=[]
+        total_data=[dates,pos,neg,nut,sad,ang,joy]
+        for data in self.all_data:
+            i=0
+            while(i<7):
+                total_data[i].append(data[i])
+                i+=1
+
+        return total_data
+
+        # def getoverall(self):
+        #     pos=0
+        #     neg=0
+        #     nut=0
+        #     sad=0
+        #     ang=0
+        #     joy=0
+        #     total_data=[pos,neg,nut,sad,ang,joy]
+        #     for data in self.all_data:
+        #         i=0
+        #         while(i<7):
+        #             total_data[i].append(data[i])
+        #             i+=1
+
+        #     return total_data
