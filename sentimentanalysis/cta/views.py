@@ -14,12 +14,6 @@ functions = ['All OVER DATA', 'MAJOR CITIES', 'SENTIMENT CHECKER', 'COVID CASES'
 paths = ['/','/major_cities', '/live-analysis', '/covid-cases', '/about-us']
 
 def getTweeterKey():
-    twitter_key = {
-        "consumerKey": "AzyhAzZQLhlQ0Ehx7aFW5zhnc",
-        "consumerSecret": "0vVY6dQIAVIX6omZxeYt8LttvHHIape6KshWfoGroLSLvH8KnB",
-        "accessKey": "950791222565597184-STDPUQzuKU5ZuTE8ubfDRDcH8596iRw",
-        "accessSecret": "FQiPWQA3m7FRQTGTXfA9PyLJxaCqgu9t7yuNdRGnbu8ao"
-    }
 
     # Credentials of twitter
     consumerKey = twitter_key["consumerKey"]
