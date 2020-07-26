@@ -25,6 +25,7 @@ urlpatterns = [
     path('about-us/',views.about_us, name='about-us'),
     path('live-analysis/',views.live_analysis, name='live-analysis'),
     path('covid-cases/',views.covid_cases, name='covid-cases'),
+    path('api/live-analysis/',views.api_live_analysis, name='covid-cases'),
     path('city/<str:city_name>/',views.city)
 
 ]

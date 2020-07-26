@@ -25,7 +25,7 @@ SECRET_KEY = 'kxg-$vm-o#nz@=p0g^+#ufm=e_yqmx71kq-#fr%&gpcilei0hh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

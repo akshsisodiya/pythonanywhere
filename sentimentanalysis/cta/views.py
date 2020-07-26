@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from django.template import loader
 import requests
 import json
@@ -7,9 +7,31 @@ import itertools
 import json
 from . import dest
 from . import graph_data
+import tweepy
+from textblob import TextBlob
 
-functions = ['All OVER DATA', 'MAJOR CITIES', 'ABOUT US', 'SENTIMENT CHECKER', 'COVID CASES']
-paths = ['/','/major_cities', '/about-us', '/live-analysis', '/covid-cases']
+functions = ['All OVER DATA', 'MAJOR CITIES', 'SENTIMENT CHECKER', 'COVID CASES', 'ABOUT US']
+paths = ['/','/major_cities', '/live-analysis', '/covid-cases', '/about-us']
+
+def getTweeterKey():
+    twitter_key = {
+        "consumerKey": "AzyhAzZQLhlQ0Ehx7aFW5zhnc",
+        "consumerSecret": "0vVY6dQIAVIX6omZxeYt8LttvHHIape6KshWfoGroLSLvH8KnB",
+        "accessKey": "950791222565597184-STDPUQzuKU5ZuTE8ubfDRDcH8596iRw",
+        "accessSecret": "FQiPWQA3m7FRQTGTXfA9PyLJxaCqgu9t7yuNdRGnbu8ao"
+    }
+
+    # Credentials of twitter
+    consumerKey = twitter_key["consumerKey"]
+    consumerSecret = twitter_key["consumerSecret"]
+    accessKey = twitter_key["accessKey"]
+    accessSecret = twitter_key["accessSecret"]
+
+    # Authenticate Object
+    authenticate = tweepy.OAuthHandler(consumerKey, consumerSecret)
+    authenticate.set_access_token(accessKey, accessSecret)
+    api = tweepy.API(authenticate, wait_on_rate_limit=True)
+    return api
 def makenav(active):
     navs=[]
     for fun, path in zip(functions, paths):
@@ -69,6 +91,14 @@ def covid_cases(request):
     data = json.dumps(data['data'])
     return render(request,'covid-cases.html',{'data':data, 'navs':makenav('COVID CASES')})
 
+def api_live_analysis(request):
+    url = request.GET['url']
+    print(url)
+    obj = analyse(url)
+    ans = obj.checksentiment()
+    data={'data': ans}
+    print(ans)
+    return JsonResponse(data)
 class nav:
     def __init__(self,name, path,active=False):
         self.name = name
@@ -77,3 +107,18 @@ class nav:
             self.active="active"
         else:
             self.active=""
+
+class analyse:
+    def __init__(self,url):
+        self.api = getTweeterKey()
+        self.url = url
+    def checksentiment(self):
+        data = self.api.get_status(self.url.split("/")[-1])
+        data_to_be_analysed = TextBlob(data.text)
+        if data_to_be_analysed.sentiment.polarity > 0:
+            sentiment = "Positive"
+        elif data_to_be_analysed.sentiment.polarity<0:
+            sentiment = "Negative"
+        else:
+            sentiment = "Neutral"
+        return sentiment
